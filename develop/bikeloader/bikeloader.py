@@ -3,7 +3,7 @@ import pandas as pd
 
 def load_csv_datetime_data(url=None, file_path=None):
     '''
-    Load a csv dataset from a file location, of failing that, a url.
+    Load a csv dataset from a file location, or failing that, a url. The data is saved as a file if needed.
     
     This function assumes that the file/url nominated holds csv data,
     with one column holding datetime values, labelled 'Date', and 
@@ -33,7 +33,16 @@ def load_csv_datetime_data(url=None, file_path=None):
     #end try
     
     # read the csv file.  colm named 'Date' can be used as an index
-    bikedf = pd.read_csv(file_path, index_col='Date', parse_dates=True, infer_datetime_format=True)
+    #bikedf = pd.read_csv(file_path, index_col='Date', parse_dates=True, infer_datetime_format=True)
+    
+    bikedf = pd.read_csv(file_path, index_col='Date')
+    try:
+        bikedf.index = pd.to_datetime(bikedf.index, format='%m/%d/%Y %H:%M:%S %p')
+    except:
+        bikedf.index = pd.to_datetime(bikedf.index)
+    #end try
+    
+    
     # retitle colms with shorter names
     bikedf.columns = ['West', 'East']
     
