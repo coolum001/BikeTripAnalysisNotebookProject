@@ -37,7 +37,7 @@ def load_csv_datetime_data(url=None, file_path=None):
     
     bikedf = pd.read_csv(file_path, index_col='Date')
     try:
-        bikedf.index = pd.to_datetime(bikedf.index, format='%m/%d/%Y %H:%M:%S %p')
+        bikedf.index = pd.to_datetime(bikedf.index, format='%m/%d/%Y %I:%M:%S %p')
     except:
         bikedf.index = pd.to_datetime(bikedf.index)
     #end try
