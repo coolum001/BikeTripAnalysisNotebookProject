@@ -1,6 +1,6 @@
 from bikeloader import bikeloader as bl
 import tempfile
-import pandas
+import pandas as pd
 
 import os
 import pytest
@@ -11,6 +11,10 @@ def test_load():
     pytest function to test is pandas dataframe is in the expected format
     
     we test the data column names, and the index type
+    
+    we also test that the data includes each hour of the day  (ie we have not mis-translated the datetime
+    strings into wrong timestamps
+    
     '''
     url = 'https://data.seattle.gov/api/views/65db-xm6k/rows.csv?accessType=DOWNLOAD'
     csv_file = '../data/fremont.csv'
@@ -19,7 +23,11 @@ def test_load():
     
     assert bikedf.columns[0]=='West' and bikedf.columns[1]=='East'
     
-    assert pandas.core.indexes.datetimes.DatetimeIndex==type(bikedf.index)
+    assert pd.core.indexes.datetimes.DatetimeIndex==type(bikedf.index)
+    
+    bike_timestamps = bikedf.index
+    assert all(pd.unique(bike_timestamps.hour) == [ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, \
+                                               12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23])
     
 #end test_load
 
