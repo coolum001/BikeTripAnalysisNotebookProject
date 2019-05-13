@@ -24,3 +24,6 @@ print('current wkg dir: ' + os.getcwd())
 print('Notebook run at: ' + str(datetime.datetime.now())+ ' local time')
 print('Notebook run at: ' + str(datetime.datetime.utcnow()) + ' UTC') 
 print('Notebook run on: ' + platform.platform())
+
+
+a = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
